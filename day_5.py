@@ -6,7 +6,6 @@ def partOne(input_str: str) -> int:
         if not(small in order_rules):
             order_rules[small] = []
         order_rules[small] = [*order_rules[small], big]
-    print(order_rules)  
     def middle_part_correct(line: str) -> int:
         page_numbers = list(map(int,line.split(',')))
         seen_numbers = {}
@@ -31,7 +30,6 @@ def partTwo(input_str: str) -> int:
         if not(small in order_rules):
             order_rules[small] = []
         order_rules[small] = [*order_rules[small], big]
-
     def middle_part_correct(line: str) -> int:
         page_numbers = list(map(int,line.split(',')))
         seen_numbers = {}
@@ -43,13 +41,7 @@ def partTwo(input_str: str) -> int:
         i = 0
         while i < len(page_numbers):
             current_number = page_numbers[i]
-            print('page numbers:', page_numbers)
-            print('current number:', current_number)
-            if current_number in order_rules:
-                print('************ index: ', get_incorrect_seen_number_index(current_number, i))
-            
             if current_number in order_rules and (incorrect_number_index := get_incorrect_seen_number_index(current_number, i)) != None:
-                print('permuting between index : ' + str(i) + ' and incorrect inde : ' + str(incorrect_number_index))
                 page_numbers[i], page_numbers[incorrect_number_index] = page_numbers[incorrect_number_index], page_numbers[i]
                 i = incorrect_number_index
                 continue
@@ -59,7 +51,6 @@ def partTwo(input_str: str) -> int:
     
     result = 0
     for page_numbers_line in pages_str.splitlines():
-        print('========================================================================', str(middle_part_correct(page_numbers_line)))
         result += middle_part_correct(page_numbers_line)
         
     return result
