@@ -38,16 +38,18 @@ def partTwo(input_str: str) -> int:
                 if rule_number in seen_numbers and current_index > seen_numbers[rule_number]:
                     return seen_numbers[rule_number]
             return None
+        did_permutation = False
         i = 0
         while i < len(page_numbers):
             current_number = page_numbers[i]
             if current_number in order_rules and (incorrect_number_index := get_incorrect_seen_number_index(current_number, i)) != None:
+                did_permutation = True
                 page_numbers[i], page_numbers[incorrect_number_index] = page_numbers[incorrect_number_index], page_numbers[i]
                 i = incorrect_number_index
                 continue
             seen_numbers[current_number] = i
             i += 1
-        return page_numbers[len(page_numbers) // 2]
+        return page_numbers[len(page_numbers) // 2] if did_permutation else 0
     
     result = 0
     for page_numbers_line in pages_str.splitlines():
